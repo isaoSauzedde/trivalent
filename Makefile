@@ -1,2 +1,2 @@
 all:
-	g++ main.cpp -o gauss -Wall
+	g++ vertex.cpp main.cpp -o gauss -Wall
