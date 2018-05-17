@@ -1,0 +1,372 @@
+\documentclass[10pt]{article}
+\usepackage[usenames]{color} %pour la couleur
+\usepackage{array}
+\usepackage{tikz}
+\usepackage{amsmath,amsfonts,amssymb,amsthm} %maths
+\usepackage[utf8]{inputenc} %utile pour taper directement les caractères accentués
+\usepackage[top=2cm, bottom=2cm, left=2cm , right=2cm]{geometry}
+\usetikzlibrary{decorations.markings}
+\newcommand\g{$\mathfrak{g}\ $}
+
+
+\newtheorem{lemma}{Lemme}[section]
+
+
+\begin{document}
+\tikzset{->-/.style={decoration={
+  markings,
+  mark=at position .5 with {\arrow{>}}},postaction={decorate}}}
+  \tikzset{-<-/.style={decoration={
+    markings,
+    mark=at position .5 with {\arrowreversed{>}}},postaction={decorate}}}
+
+
+
+On étudie un fibré $G$ principal $P$ au dessus de $M$. On suppose qu'on a fixé une connexion particulière et un produit scalaire sur \g, de sorte qu'on identifie connections et 1 formes \g valuées. Les formes sont supposées \g valuées, sauf lorsqu'on précise "forme scalaire" ou "\g$ \times $\g forme ".
+
+On appelle \textit{$p$-forme singulière} une fonctionnelle linéaire sur l'espace des $3-p$ formes lisses. On identifie une $p$-forme lisse $A$ avec la $p$ forme singulière $B\mapsto \int_M A\wedge B$. La dérivée extérieure s'étend naturellement par $dA:B\mapsto \pm A(dB)$. Si $A$ est une $p$ forme singulière et $B$ une $q$ forme lisse sur le support de $A$, $p+q\leq 3$, on note $A\wedge B$ la \g$ \times $\g  $p+q$ forme singulière
+$C\mapsto A(B\wedge C)$. Pour une \g$ \times $\g forme A , on note $\langle A\rangle_\mathfrak{g}$ la forme scalaire obtenue par contraction.
+
+On note $\ell$ une boucle orientée simple, $S(\ell)$ son support. On lui associe la $2$ forme scalaire singulière:
+
+\[Ber_\ell: B\mapsto \int_{S(\ell)} \ell^*(B) \]
+
+Soit $\ell'$ est une autre boucle simple, de support disjoint de $\ell$, et supposons qu'il existe des $1$ formes scalaires $F_\ell, F_{\ell'}$ telles que $dF_\ell=Ber_\ell$, $dF_{\ell'}=Ber_{\ell'}$. On supose également que $F_{\ell}$ (resp. $F_{\ell'}$) est lisse hors de $S(\ell)$ (resp. $S(\ell')$). On peut former le produit extérieur $F_\ell\wedge Ber_{\ell'}$. Si $\tilde{F}_\ell$ vérifie également $d\tilde{F}_\ell=Ber_\ell$, alors \[
+  (\tilde{F}-F)_\ell\wedge Ber_{\ell'}=\pm d(\tilde{F}-F)_\ell\wedge F_{\ell'}=0\]
+à condition que $M$ soit sans bord. La quantité $CS(\ell,\ell'):=F_\ell\wedge dF_{\ell'}$ est donc un invariant des noeuds orientés $\ell,\ell'$.
+
+D'un autre côté $F_\ell\wedge dF_\ell$ est une quantité mal définie a priori qui demande au moins une régularisation.
+
+Si l'on travaille sur $M=\mathbb{R}^3$, on pose explicitement
+
+\[A_\ell:(x,v)\mapsto \int_{U(1)} \frac{\det(x-\ell_s;\dot{\ell}_s;v)}{\|x-\ell_s\|^3} ds \]
+
+Lorsqu'on calcule l'holonomie de $A_\ell$ le long d'un lacet simple $\ell'$, on obtient la formule de Gauss pour le linking number entre $\ell$ et $\ell'$. En particulier la connexion est plate hors du support $S(\ell)$ de  $\ell$. Il faut encore calculer $dA_\ell$ sur $S(\ell)$: pour $B$ une 1 forme lisse à support compact, et avec les coordonnées standardes,
+
+\begin{align*}
+  dA(B)&=A_\ell(dB)\\
+  &=\lim_{\epsilon\to 0}\int_{x\in\mathbb{R}^3\setminus B(\ell_s,\epsilon)} \int_{U(1)} \frac{\epsilon^{ijk}(x-\ell_s)_i(\dot\ell_s)_j dx_k\wedge dB_x}{\|x-\ell_s\|^3} ds\\
+  \intertext{Comme $B$ est à support compact, on peut intégrer par partie. Comme de plus la connection est plate hors de $S(\ell)$, seul le terme de bord est non nul:}
+  &=\lim_{\epsilon\to 0}\int_{S(\ell_s,\epsilon)}\int_{U(1)} \frac{\epsilon^{ijk}(x-\ell_s)_i(\dot\ell_s)_j  (B_x)_l}{\|x-\ell_s\|^3} \iota^*(dx_k\wedge dx_l) ds\\
+  &=\int_{U(1)} \epsilon^{ijk} \left(\int_{S(0,1)}z_i   \iota^*(dz_k\wedge dz_l) \right) (\dot\ell_s)_j(B_{\ell_s})_l ds\\
+  &=\int_{U(1)} \epsilon^{ijk} \left(\int_{S(0,1)}z_i   \iota^*(dz_k\wedge dz_l) \right) (\dot\ell_s)_j(B_{\ell_s})_l ds\\
+  &=\int_{U(1)} \epsilon^{ijk} \left( \int_0^{2\pi} d\theta \int_0^{\pi} d\phi \sin(\phi)^3\cos(\theta)^2 \delta_{jl}+\int_0^{2\pi} d\theta \int_0^{\pi} d\phi \sin(\phi)^2 \cos(\phi) \cos(\theta)^2 \delta_{il} \right)(\dot\ell_s)_j(B_{\ell_s})_l ds\\
+&=C \int_{U(1)} \langle \dot\ell_s;B_{\ell_s})\rangle ds
+  \end{align*}
+
+Le courant $A_\ell$ vérifie donc bien $dA_\ell=Ber_\ell$, et il est alors clair que $CS$ (testé sur la fonction identiquement égale à $1$, ou plus précisément sur une suite quelconque de fonctions $0\leq f_n\leq 1$ à supports compacts, égales à $1$ sur une exhaustion de compacts $K_n$. On note encore $CS$ le résultat) est le linking number. Cette formulation se prête bien à interpréter le linking number à partir de boucles de Wilson: pour une connexion $A$ lisse et une boucle simple $\ell$, $Hol_A(\ell)=exp(i Ber_\ell\wedge A)$. On a alors, formellement, et en notant $\langle A; B \rangle=\int_M A\wedge dB$,
+
+\begin{align*}
+  ``\frac{1}{Z}\int_{\mathcal{A}} Hol_A(\ell) e^{i k CS(A)} DA "&=``\frac{1}{Z}\int_{\mathcal{A}} e^{i k \langle A ;A+F_\ell \rangle } DA"\\
+&=e^{i\langle F_\ell;F_\ell/4 \rangle}\\
+&=e^{iSLK(\ell)/4}\\
+\end{align*}
+
+Ici on a interprété $CS(\ell)$ comme le self linking number, même si l'on a vu que la quantité était mal définie, avec l'idée que, si l'on remplace l'holonomie de $\ell$ par un polynome d'holonomies de plusieurs noeuds, on obtiendra une expression similaire en remplacant $SLK$ par $LK$. Si l'on a choisi le polynôme de telle sorte qu'à la fin seul des termes de la forme $LK(\ell, \ell')$ pour $S(\ell)\cap S(\ell')=\emptyset$, le calcul sera "exact".
+
+Cependant dans ce calcul informel, et qui donne le résultat attendu, on a supposer implicitement que le domaine d'intégration était stable par translation de $F_\ell/2$. Si l'on veut que le domaine soit indépendant du lien choisi, on doit donc considérer un espace de connections qui contienne l'espace engendré par les $F_\ell$. Notons $\mathcal{A}$ cet espace (qui dépend de la régularité qu'on impose sur les boucles: considérons déjà qu'elles sont toutes linéaires par morceaux). Pour une boucle fixée $\ell$, $\mathcal{A}$ va typiquement se diviser en trois sous espaces: la "majorité de l'espace", correspondant à des $\ell'$ sans intersections avec $\ell$, puis les $\ell'$ avec un nombre fini d'intersections, puis les $\ell'$ ayant au moins un segment commun avec $\ell$ % ATTention: correction supplémentaire si intersection sur deux segments ou plus!! ma formule plus bas marche peut etre pas...
+
+On se concentre pour l'instant sur la "grosse partie".
+
+Soit $\Gamma=(V,E,F,P)$ un "graphe" fini dans $M=\mathbb{R}^3$. On suppose que tous les éléments de P sont des polygônes sans topologie dans $M\cup \{\infty\}$. De plus deux faces n'ont jamais le même ensemble d'arêtes.
+On fixe une connexion $A$ et on s'intéresse à l' holonomie de $A$ le long des boucles de $\Gamma$.
+
+Soit $\Gamma^t$  le dual de $\Gamma$. On modifie $\Gamma^t$ de la manière suivante:
+%-on écrase les bifaces de $\Gamma$: chaque fois qu'un sommet est de degré 2 dans $\Gamma^t$, on le supprime et on fusionne les deux arêtes qui y sont attachées.
+
+Chaque fois qu'un sommet est de degré $d>3$, attaché à des arêtes $e_0, \dots , e_{d-1}$, on le remplace par $d-2$ sommets, tous trivalents, $v_1, \dots , v_{d-2}$, avec le sommet $v_1$ attaché à $e_0$ et $e_1$, et connecté à $v_1$; le sommet $v_{d-2}$ attaché à $e_{d-2}$ et $e_{d-1}$ et connecté à $v_{d-3}$, et chaque autres sommets $v_i$ attaché à $e_i$ et connecté à $v_{i+1}$ et $v_{i-1}$. Ces opérations sont faites "localement" : pour chaque sommet initial, on fixe un petit voisinage du sommet, de sorte que ces voisinages sont deux à deux disjoints, inclus dans
+$M\setminus E$, et chaqu'un difféomorphe à une sphère. On note
+$\Gamma^*=(V^*,E^*)$ le nouveau graphe (il dépend de la manière dont on a fait les opérations, même en temps que graphe), qui est trivalent.
+
+On introduit encore un graphe, "bidual", qu'on note $\Gamma^{**}$, obtenu en associant à chaque arête $e^*$ de $\Gamma^*$ une petite boucle $l_{e^*}$ qui tourne une fois autour de $e^*$. On fixe aussi deux points $v_e^{*in}$ et $v_e^{*out}$ de $l_{e^*}$ arbitraires, et on sépare $l_e$ en deux arêtes $l_{e^{*1}}$ et $l_{e^{*2}}$ entre $v_{e^{*in}}$ et $v_{e^{*out}}$ . On fixe un arbre T orienté sur l'ensemble $E^*$, et pour toute arête $(e^*,f^*)$ de T on  relie les sommets $v_{e^{*in}} $ et $v_f^{*out}$ (par des arêtes qui n'intersectent aucune des arêtes des différents graphes précédents\dots )
+ Le graphe $\Gamma^{**}$ a alors pour sommets les $v_{e^{*in}}$ et $v_{e^{*out}}$, et pour arêtes les arêtes de $T$ et les $l_{e^{*1}}$ et $l_{e^{*2}}$. We fixe a privileged orientation for edges: for $l_{e^{*1}}$, it goes from $v_{e^{*in}}$ to $v_{e^{*out}}$. For $l_{e^{*2}}$, it goes from $v_{e^{*out}}$ to $v_{e^{*in}}$.
+
+Soit $A'$
+
+Conjecture 0: There always exists a singular connection $A'$, smooth and flat outside $E^*$, so that the holonomies of $A'$ and $A$, along $\Gamma$-loops , are equal.
+
+It is unique up to gauge fixing. Up to gauge fixing, we may assume the holonomy of $A'$ to be zero along the $T$-edges and the  $l_{e^{*2}}$ (because this is still a tree $T'$). Define $g_{e^*}$ as the holonomy around $l_{e^{*1}}$ (this is uniquely defined with the previous gauges, since adding any $l_{e^{*1}}$ to $T'$ forms a cycle).
+
+Conjecture 1: The knot type of K in $\Gamma$ is fully determined by its homology type in $M-E^*$.
+
+Conjecture 2: The homotopy class in $M-E^*$  of a simple loop $L$ in $\Gamma$  can be represented by a loop in $\Gamma^{**}$, in the following way:
+-If $P$ is an open or closed path which is homotopy equivalent (with fixed ends if the path is open) to a simple path $P'$ in $\Gamma^{**}\cup (L-P)$, then we map it to $\Phi(P)=P'$.
+-If a path P goes from $v_{e^{*in}}$ to $v_{e^{*out}}$ (or the other way) winding twice around $e^*$, without turning around anything else including itself or (L-P), we associate it to the path $\Phi(P)= l_{e^{*1}}l_{e^{*2}}l_{e^{*1}} $ in $\Gamma^{**}$ (or $\Phi(P)=l_{e^{*2}}l_{e^{*1}}l_{e^{*2}}$ if it turns the other way). It goes similarly when it winds more times.
+-Then, if $L=P_1 P_2 \dots P_n$ with the $P_i$ falling in the previous two cases, we represent it as $\Phi(P_1)\Phi(P_2)\dots\Phi(P_n)$.
+Here the conjecture says that it is always possible to do so, not that there is a unique way to do so. We also conjecture the homotopy type of $L$ in $M-\Gamma^*$ is fully determined by such a transformation.
+
+Thus, once we have fixed $\Gamma^*$ and$\Gamma^{**}$, choosing a class of connections modulo "equal holonomies on loops of $\Gamma$ " is equivalent to choosing the $g_{e^*}$. They are submitted to the relations that for any vertex $v^*$ of $V^*$ attached to the three edges $e^*_a$, $e^*_b$ and $e^*_c$, in "cyclic order" (defined below), we must have $g_{e^*_a}g_{e^*_b}g_{e^*_c}=1$ ($1$ being the neutral element in $G$). Here "cyclic order" means we can go from $e^{*in}_a$ to $e^{*out}_b$ without using the edges $l_{e^{*1}_a}$ nor
+ $l_{e^{*2}_a}$ , and we can go from $e^{*in}_b$ to $e^{*out}_c$ without using the edges $l_{e^{*1}_b}$ nor $l_{e^{*2}_c}$ , (or any cyclic permutation of this condition, which would leads to the same relation). Any choice of function $g$ from $E^*$ to $G$ that respect  this condition (let' call it "consistency condition") and behave as expected under change of orientation of an edge corresponds to the holonomy of a connection generated by the $F_\ell$ for $\ell$ in $\Gamma^*$ .% Bon nombre d'étoile là?
+
+We can prove this by recursion on the number of vertices of the graph: if their is at least $1$ such vertex, we can take an edge $e$ attached to it, and find a loop $\ell$ it belongs to. Then we substract $\ell g_e$ from the connection. Thus, we can delete the edge $e$. Because of the consistency condition, the edges that have to be fused are now endowed with the same $G$ element, thus can indeed be fused. In the case the two vertex that should be deleted are connected together twice, making them disappear lead to a "free edge"  $\ell'$ , connected to no vertex at all, with an element $g$ . We then make it disappear directly by substracting $\ell' g$. The new graph is clearly trivalent, with less vertices, and the new connection on it still satisfy the consistency condition. Thus we can apply the recursion. When finally there is no vertices at all, the connection is zero, which conclude the proof.
+
+
+From now one we assume that a trivialization of $P$ and a scalar product on $\mathfrak{g}$ is fixed.
+
+Instead of choosing $\Gamma^*$ to be trivalent, we could have supposed it to be (as a graphe) a set of vertex $V^*=\{v^*_e\}$ indexed by $E$ with exactly one edge $f^*_e=(v^*_e,v^*_e)$ by element of E. As an embedded graph, each $f^*_e$ would have been a tiny loop winding once around $e$ (and not winding between themselves and the rest of E- everything unknotted). Thus $e$ is also winding once around $f^*_e$ and does not wind around any other edge of $E^*$.
+Then the connection $A'$ would have simply been the singular flat connection which associates to a loop winding once around $f^*_e$ the holonomy $Hol_A(e)$.
+
+In the commutative case it's very easy to have such a connection when the Lie group is commutative: we only have to construct such a connection for one unknotted loop $f^*_e$, and then "add the connection". That is, we fix a trivialization of the bundle, then our connections $C_{ f^*_e, Hol_A(e) } $ are "singular $\mathfrak{g}$ valued one forms". We add them, to have a new connection. This new connection is also flat, since here $d_{A+B}(A+B)=d(A+B)=d_A(A)+d_B(B)$.
+
+For one (knotted or not) oriented loop $L$, we have such a connection given by the "magnetic field", once we have fixed an Hilbert structure on $M$: denoting by $\gamma$ the speed-one parametrization of $L$, the singular connection $C_L^g$ is given by
+\[C_L^g: (x,v)\mapsto \int_{U(1)}\frac{\det(\dot\gamma_s; v; \gamma_s-x)}{\|\gamma_s-x\|^3} ds g\]
+where $g$ is an element of the Lie algebra.  When the Lie group is $U(1)$, this corresponds to the magnetic field generated by a constant current along $L$. Thanks to Gauss formula, we see that the holonomy along a loop $L'$ (that do not intersect $L$) is the exponential of $g$ times the linking number between $L$ and $L'$, which is exactly the desired quantity in condition $\exp(g)=G$. The space $M$ would have been a topologically trivial space with another metric, there would be some green function.
+
+
+
+
+Thus, the "measure" for the "Chern Simons integral", when evaluated on Wilson loops operators, for loops with edges on some finite graph $\Gamma$, should reduce to a measure on flat connections, singular on a trivalent graphe. Putting aside for the moment questions of determinants coming from gauge fixing, the evaluation of the weight given to a given class of singular flat connection $A$ requires to know the value of its Chern Simons functional. This turns out to be an ill-defined question, as we could have bet due to the well-known need of regularization (framing or other) :
+
+We work in the context of distribution: %we have fixed a metric $m$ on $M$, and a scalar product on $g$. Thus the space $\mathcal{A}$ of connections is identified with the space of g valued one forms, on which we have a scalar product given by \[\langle u\otimes g, v\otimes h \rangle_\mathcal{A}= \int_M \langle \u_x,v_x\rangle_m \langle g_x,h_x \rangle_\mathgoth{g}    \]
+
+Let's call $p$-distribution a linear functional on smooth $\mathfrak{g}$-valued $(3-p)$-forms.
+
+Without making use of the scalar product on $\mathfrak{g}$, a singular connection should in fact be a functional on $\mathfrak{g}^*$-valued $2$- forms, so that the duality bracket is given by integration on $(g\otimes g^*)$-valued n forms, which requires no choice. Thanks only to the scalar product on $\mathfrak{g}$, we see singular connections as 1-distribution.
+%Singular connections can thus be seen as "functional on smooth connections", with a smooth connection A being associated $\langle A , \cdot \rangle_\mathcal{A}$.
+
+In this context, for a $p$-distribution F, $d F$ is the $p+1$ distribution  defined by duality \[d F:A\mapsto (-1)^p F(d A)\]
+
+Remark here that we do not use $d^* A$, which would require to have a metric on M, and does not have the good degree. This comes from the fact that the 1-distribution associated to a smooth $\mathfrak{g}$-valued 1-form $A$ is given by $F_A:B\mapsto int_M A\wedge B$, whilst in a metric framework we would associate to $A$ the 2-distribution $G_A:B\mapsto int_M \star (A\wedge \star B)$. Then it would be natural indeed to define $dG$ as the $1-distribution$ mapping $B$ to $d^*B$.
+
+
+
+Wedge product between a $p$-distribution and a $q$-distribution is also defined, as a functional on $3-(p+q)$-forms   (vérifier le degré ici\dots ) as soon as there convolution product is defined.
+
+Thus for two 1-distributions $A$ and $B$ and a connection $C$, in dimension 3, $A\wedge d_C B$, when defined, is a linear functional on $0$-forms. When it has compact support, it gives a privileged number by evaluation on the constant function equal to 1. When $A=B=C$, we write $CS(A)$ for such an evaluation.
+
+The fact is that, in our case, that is with $A$ and $B$ being flat connections singular on a finite trivalent graph $\Gamma$ with cyclic ordering of the edges $(v_1,v_2,v_3)$ at each vertex $v$, the functional  $A\wedge dB$ is well defined as soon as $A$ and $B$ are in fact singular on two subgraphs $G_A$, $G_B$ which are disjoined one from the other. When trying for example to compute $A\wedge dA$, for a commutative Lie group, we fall on a problem which basically is the same as the one dimensional problem of defining the product of the distribution associated to $\log |x|$ and the distribution $\delta_0$. Another way to see the problem is that it leads to evaluate a distribution on 0 while this distribution a priori is not even an $L^2$ function. This view leads to an heat kernel based regularization, which implies to choose a metric but for which metric dependency are in general well understood.
+
+Still, we can do remarks, only at an informal level, before we choose such a metric. We look first at the compact commutative case.
+
+The finite trivalent graph $\Gamma^*=(V,E)$ is fixed, $E=e_1,\dots ,e_n$ (we fix a dialing only to lighten notations, nothing will ultimately depend on it). For a singular flat connection $A$, we note $A_e$ the holonomy associated to $A$ when we wind once around the oriented edge $e$. Reciprocally, for elements $g_e\in G$ -where for $e$ running over nonoriented edges, we have also fixed an orientation of $e$- we write $\sum_e  g_e e$ for the singular flat connection $A$ so that $A_e=g_e$.
+
+From the consideration above, it seems natural to think that the Chern Simons action that we would like to associate to a singular flat connection should be infinite as soon as the connection $A$ is truly singular (i.e. it is not a smooth connection, i.e. there is an edge $e$ so that $A_e$ is different from $e$). Thus our Chern Simons measures, which should at a very first sight looks like (forgetting the ghost terms\dots ) \[\mu_\Gamma(G_1,\dots,G_n)=d\lambda_{G_1,\dots , G_n} exp(i x CS(\sum_k G_k e_k))\] (here $\lambda$ is the normalized Haar measure on the subspace where the consistency condition is satisfied) may in reality give a non null relative weight to the set of connections $C$ with $C_{e_i}=1$ for some $i$: indeed around such connection, the measure is very less oscillating than when all the $G_i$ are different from $1$ (in the large $k$ approximation, it is a term of lesser order). If $e_i$ connects $s$ to $t$, as $C_{s_1}C_{s_2}C_{s_3}=C_{t_1}C_{t_2}C_{t_3}=1$,
+the vertices $s$ and $t$ and the edges $e_i$ can be deleted from the graph (whilst the two left edges attached to $s$ are fused, as those attached to $t$). This left us with a new trivalent graph $\Gamma_i^*$ with cyclic order. Let's say the dialing is such that the two fused edges at $s$ were numbered $i+1,i+2$, whilst the ones at $t$ where numbered $i+3,i+4$. Then to $\Gamma_i^*$ we give the dialing so that the order between edges is the same (that is, the edge $e_j$ in $G$ is $e_j$ in $\Gamma_i^*$ if $i<j$, and $e_{j-3}$ if $j>i+5$. The fusion between $e_{i+1}$ and $e_{i+2}$ is now $e_i$, and the fusion between $e_{i+3}$ and $e_{i+4}$ is now $e_{i+1}$ ).
+Then the measure $\mu_\Gamma$ looks more like \begin{align*}
+\mu_{\Gamma^*}(G_1,\dots,G_n)&=\sum_i \delta_{G_i,1} \delta_{G_{i+1},G_{i+2}} \delta_{G_{i+3},G_{i+4}}  \\
+&\mu_{\Gamma^*_i}(G_1, G_2,\dots,G_{i-2}, G_{i-1},G_{i+1},G_{i+3},G_{i+5},G_{i+6},\dots,G_{n-5}, G_{n-3})\\ &+ d\lambda_{G_1,\dots, G_n} exp(i x CS_{\Gamma^*} (\sum_k G_k e_k))\end{align*}
+
+In the large $k$ approximation, the last term should be of order $1$ more (in $1/k$). This looks very similar to the usual large $k$ approximation, but here it's in some sense dual, as diagrams are not attached to the link in $ \Gamma$ we're looking at, but to $\Gamma^*$.
+
+\newpage
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Lorsqu'on essaye d'étendre la forme bilinéaire $A\wedge dB$ associée à l'action de Chern Simons sur des connexions singulières, on obtient très naturellement une quantité $CS$ qui coincide avec $A\wedge dB$, et est définie dès que $A$ ou $B$ est à support compact et que les supports singuliers coincident. On remarque alors que $CS(A_\ell,A_\ell)$ n'est a priori pas définie par cette formule, tandis que $CS(A_\ell,A_{\ell'})$ est bien défini dès lors que $\ell$ et $\ell'$ sont à support disjoints. Mieux:  cette quantité coincide alors avec le linking number entre ces deux quantités, en particulier
+\begin{multline}
+   e^{i C/k CS(A_\ell+A_{\ell'})-CS(A_\ell)-CS(A_{\ell'})}=
+   e^{i C/k LK(\ell,\ell')}\\
+   =  ``\frac{1}{Z}\int_{\mathcal{A}} Tr(Hol_A(\ell)Hol_A(\ell')-Hol_A(\ell)-Hol_A(\ell')) e^{i k CS(A)} DA "
+\end{multline}
+
+Où le second terme est calculé comme [Albeverio, Hahn, Sengupta]. Or cette identité ne semble pas être un pur hasard. Au moins dans l'approximation de la phase stationnaire ($k\to \infty$), il est usuelle de considérer, par analogie avec les intégrales oscillantes en dimension finie,  que la contribution principale à $\int_{\mathcal{A}} u(A) e^{i k CS(A)} DA $ est donnée par les connections plates. Ceci vaut dans le cas fini dimensionnel pour $u$ suffisament lisse et à support compact. Hors ici, puisque la fonctionnelle $A\mapsto Tr(Hol_A(\ell))$ peut devenir arbitrairement oscillante lorsque $A$ se concentre près de $S(\ell)$ (en tant que $1$ forme), on ne peut a priori pas supposer que les connections qui contribuent à la phase stationnaire soient plates le long $S(\ell)$: on peut seulement dire que les connections non plates, mais lisses sur $S(\ell)$, ne contribuent pas à la phase stationnaire. Il semble donc que la contribution principale vienne en fait des connections plates hors de $S(\ell)$, mais potentiellement singulière sur $S(\ell)$.
+
+Hors de la phase stationnaire, on a vu que, pour un lien $L$ et un noeud $\ell$ de supports disjoints, on a\[e^{i CS(h A_\ell,A_{L}) }=e^{ih LK(\ell,L)}=Tr(Hol_{h A_\ell}(L))\]
+
+Si on étend formellement cette relation en remplacant $h A_\ell$ par une connexion quelconque, l'expression
+\[\frac{1}{Z}\int_{\mathcal{A}} Tr(Hol_A(\ell)) e^{i k CS(A)} DA\]
+se calcule simplement en "complétant le carré", sous l'hypothèse d'invariance du domaine d'intégration $\mathcal{A}$ par translation de $A_\ell$. En particulier, on ne peut effectivement pas supposer que les connections sur lesquelles on intègre soient "non singulières".
+
+%Il est remarquable de constater que . Ce besoin de régularisation pour un seul noeuds, ainsi que l'apparition du linking number suggère un possible lien avec l'intégrale de Chern Simons.
+Quitte à étendre l'espace d'intégration $\mathcal{A}$, on peut en fait supposer qu'il est -
+
+
+
+
+
+bla
+bla
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\newpage
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+
+  \newpage
+  \begin{align*}
+  &=\lim_{\epsilon\to 0}\int_{x\in\mathbb{R}^3\setminus B(\ell_s,\epsilon)} \int_{U(1)} \frac{\epsilon^{ijk}(x-\ell_s)_i(\dot\ell_s)_j dx_k\wedge ( \partial_lB_m dx_l\wedge dx_m )}{\|x-\ell_s\|^3} ds \\
+  &=\lim_{\epsilon\to 0}\int_{x\in\mathbb{R}^3\setminus B(\ell_s,\epsilon)} \int_{U(1)} \frac{\epsilon^{kij}\epsilon^{klm}(x-\ell_s)_i(\dot\ell_s)_j( \partial_lB_m )}{\|x-\ell_s\|^3} ds dx \\
+  &=\lim_{\epsilon\to 0}\int_{x\in\mathbb{R}^3\setminus B(\ell_s,\epsilon)} \int_{U(1)} \frac{(\delta_{il}\delta_{jm}-\delta_{im}\delta_{jl})(x-\ell_s)_i(\dot\ell_s)_j( \partial_lB_m )}{\|x-\ell_s\|^3} ds dx \\
+  &=\lim_{\epsilon\to 0}\int_{x\in\mathbb{R}^3\setminus B(\ell_s,\epsilon)} \int_{U(1)} \frac{(x-\ell_s)_i(\dot\ell_s)_j( \partial_iB_j-\partial_jB_i  )}{\|x-\ell_s\|^3} ds dx \\
+  \intertext{A $s$ fixé, on fait un changement de variable $x_i-\ell_s\mapsto -(x_i-\ell_s)$}
+\end{align*}
+
+
+
+
+\begin{align*}
+dA(B)&=\lim_{\epsilon\to 0} \int_{x\in\mathbb{R}^3\setminus B(\ell_s,\epsilon)}  \int_{U(1)} ds  \frac{\epsilon^{ijk}(x-\ell_s)_i(\dot\ell_s)_j(\partial_i B^j- \partial U_2^j-U_1^j U_2^i)}{\|x-\ell_s\|^3} ds dx
+ \left(v\mapsto \frac{\langle(x-\ell_s)\wedge \dot{\ell}_s;v\rangle}{\|x-\ell_s\|^3}\right)_xd \wedge d B_x \\
+&=\lim_{\epsilon\to 0} \int_{U(1)} d\dot{\ell}_s \int_{x\in\mathbb{R}^3\setminus B(\ell_s,\epsilon)}   \left( \frac{(x-\ell_s)\wedge \dot{\ell}_s}{\|x-\ell_s\|^3}\right)_x \wedge dB_x \\
+&=\lim_{\epsilon\to 0} \int_{U(1)} d\dot{\ell}_s \int_{x\in \mathbb{R}^3\setminus B(\ell_s,\epsilon)}  B_x\wedge d\star\left( \frac{(x-\ell_s)\wedge \dot{\ell}_s}{\|x-\ell_s\|^3}\right)_x
+\\&+\int_{U(1)} d\dot{\ell}_s \int_{x\in S(\ell_s,\epsilon)} B_x\wedge \star\left(\frac{(x-\ell_s)\wedge\dot{\ell}_s}{\|x-\ell_s\|^3}\right)_x \\
+&=0+\lim_{\epsilon\to 0} \int_{U(1)} d\dot{\ell}_s \int_{S(\ell_s,\epsilon)} \left\langle \frac{x-\ell_s}{\|x-\ell_s\|}\middle| B_{\ell_s} \wedge \star\left(\frac{(x-\ell_s )\wedge\dot{\ell}_s}{\|x-\ell_s\|^3}\right)_z\right\rangle d\sigma_x \\
+&=\lim_{\epsilon\to 0} \int_{U(1)} d\dot{\ell}_s \int_{S(0,1)} \left\langle \frac{x-\ell_s}{\|x-\ell_s\|}| B_{\ell_s} \wedge \star\left(\frac{\epsilon z \wedge\dot{\ell}_s}{\|\epsilon z\|^3}\right)_z\right\rangle \epsilon^2 d\sigma_z \\
+\end{align*}
+
+
+
+
+
+ On part d'une étude sur $M=\mathbb{R}^3$ (muni de toute sa structure), avec le groupe de gauge $G=U(1)$. On identifie $\mathfrak{u}(1)$ avec $\mathbb{R}$. Le fibré de $G$ sur $M$ est supposé trivialisé, de sorte qu'on identifie finalement les connections à des $1$ formes.
+
+ On peut alors remarquer la chose suivante:
+
+ A une boucle simple orientée $\ell$, on associe la connection singulière $L^1_{loc}$
+ \[A_\ell:(x,v)\mapsto \int_{U(1)} \frac{\det(x-\ell_s;\dot{\ell}_s;v)}{\|x-\ell_s\|^3} ds \]
+
+
+Lorsqu'on calcule l'holonomie de $A_\ell$ le long d'un lacet simple $\ell'$, on obtient la formule de Gauss pour le linking number entre $\ell$ et $\ell'$. En particulier la connexion est plate hors du support $S(\ell)$ de  $\ell$.
+
+Si on considère des connections plus singulières, c'est à dire des fonctionnelles linéaires sur l'espace des 2 formes lisses valuées (en identifiant une 1 forme lisse $A$ avec la fonctionnelle $B\mapsto \int A\wedge B)$, on peut calculer la différentielle extérieure de $A_\ell$:
+
+\[dA_\ell (B)=A_\ell (dB)= \int_M  \int_{U(1)} \frac{dB_x\wedge \star((x-\ell_s)\wedge \dot{\ell}_s) }{\|x-\ell_s\|^3} ds \]
+
+Puisque $A_\ell$ est plate hors de $S(\ell)$, la 2 forme singulière $dA_\ell$ peut être étendu à l'espace des 1 formes $L^1_{loc}$, lisses seulement sur un voisinage $U$ de $S(\ell)$ (Une intégration par partie montre directement que $dA_\ell(B)=0$ lorsque $B$ est nulle sur $U$).
+
+%En particulier, si $\ell'$ est une boucle simple orientée qui n'intersecte pas $\ell$, on peut calculer $(dA_\ell)^i((A_{\ell'})^je_j)$, et on a clairement ...%OSEF?
+
+
+
+
+
+. Lorsqu'on essaye d'étendre la forme bilinéaire $A\wedge dB$ associée à l'action de Chern Simons sur des connexions singulières, on obtient très naturellement une quantité $CS$ qui coincide avec $A\wedge dB$, et est définie dès que $A$ ou $B$ est à support compact et que les supports singuliers coincident. On remarque alors que $CS(A_\ell,A_\ell)$ n'est a priori pas définie par cette formule, tandis que $CS(A_\ell,A_{\ell'})$ est bien défini dès lors que $\ell$ et $\ell'$ sont à support disjoints. Mieux:  cette quantité coincide alors avec le linking number entre ces deux quantités, en particulier
+\begin{multline}
+   e^{i C/k CS(A_\ell+A_{\ell'})-CS(A_\ell)-CS(A_{\ell'})}=
+   e^{i C/k LK(\ell,\ell')}\\
+   =  ``\frac{1}{Z}\int_{\mathcal{A}} Tr(Hol_A(\ell)Hol_A(\ell')-Hol_A(\ell)-Hol_A(\ell')) e^{i k CS(A)} DA "
+\end{multline}
+
+Où le second terme est calculé comme [Albeverio, Hahn, Sengupta]. Or cette identité ne semble pas être un pur hasard. Au moins dans l'approximation de la phase stationnaire ($k\to \infty$), il est usuelle de considérer, par analogie avec les intégrales oscillantes en dimension finie,  que la contribution principale à $\int_{\mathcal{A}} u(A) e^{i k CS(A)} DA $ est donnée par les connections plates. Ceci vaut dans le cas fini dimensionnel pour $u$ suffisament lisse et à support compact. Hors ici, puisque la fonctionnelle $A\mapsto Tr(Hol_A(\ell))$ peut devenir arbitrairement oscillante lorsque $A$ se concentre près de $S(\ell)$ (en tant que $1$ forme), on ne peut a priori pas supposer que les connections qui contribuent à la phase stationnaire soient plates le long $S(\ell)$: on peut seulement dire que les connections non plates, mais lisses sur $S(\ell)$, ne contribuent pas à la phase stationnaire. Il semble donc que la contribution principale vienne en fait des connections plates hors de $S(\ell)$, mais potentiellement singulière sur $S(\ell)$.
+
+Hors de la phase stationnaire, on a vu que, pour un lien $L$ et un noeud $\ell$ de supports disjoints, on a
+\[e^{i CS(h A_\ell,A_{L}) }=e^{ih LK(\ell,L)}=Tr(Hol_{h A_\ell}(L))\]
+
+Si on étend formellement cette relation en remplacant $h A_\ell$ par une connexion quelconque, l'expression $\frac{1}{Z}\int_{\mathcal{A}} Tr(Hol_A(\ell)) e^{i k CS(A)} DA$ se calcule simplement en "complétant le carré", sous l'hypothèse d'invariance du domaine d'intégration $\mathcal{A}$ par translation de $A_\ell$. En particulier, on ne peut effectivement pas supposer que les connections sur lesquelles on intègre soient "non singulières".
+
+%Il est remarquable de constater que . Ce besoin de régularisation pour un seul noeuds, ainsi que l'apparition du linking number suggère un possible lien avec l'intégrale de Chern Simons.
+Quitte à étendre l'espace d'intégration $\mathcal{A}$, on peut en fait supposer qu'il est -
+
+
+\newpage
+
+
+Soit $G=(V,E)$ un graphe trivalent à $2k$ sommets, et $n$ composantes connexes, dont on oriente arbitrairement les arêtes.
+
+Pour une arête $e$ et un sommet $v$, on pose
+\[
+  \epsilon_{e->v}=
+  \left\{
+    \begin{array}{ll}
+      0 & \mbox{si } e \mbox{ n'est pas incidente à }v\\
+      1 & \mbox{si } but(e)=v\\
+      -1 & \mbox{si } source(e)=v
+    \end{array}
+  \right.
+\]
+
+Soit $H$ l'espace hilbertien dont une base orthonormée est donnée par $E$, et $K$ le sous espace $K=\bigcap_{v\in V} K_v$  où
+
+\[K_v=\{ h=\sum_{e \in E} \lambda_e e : \ \sum_{e \in E} \lambda_e \epsilon_{e->v}=0\}\]
+
+\begin{lemma}
+$K$ est de dimension $k+n$.
+\end{lemma}
+\begin{proof}
+Clairement $dim K\geq k$. Pour chaque composante connexe $G_0$ de $G$, on a pour tout $e\in E$, $\sum_{v \in G_0} \epsilon_{e->v}=0$. Donc pour tout $h=\sum_{e \in E} \lambda_e e \in H$, automatiquement  \[\sum_{v \in G_0} \sum_{e \in E} \lambda_e \epsilon_{e->v}=0\]
+ On en déduit facilement que $dim K\geq k+n$.
+
+
+% $Vect C_x $ est en fait engendré par $2k-n$ relations: soit $G_0=(V_0,E_0)$ une composante connexe quelconque. La somme membre à membre des $C_x$ pour $x\in V_0$ donne la relation triviale: chaque arête de $E_0$ apparait avec les deux orientations. Donc $dim F\geq 2k-n$.
+
+Pour l'autre inégalité, on pose $\epsilon_v=(\epsilon_{e->v})_e$. Il sufit alors de voir que, si $\sum_v \lambda_v \epsilon_v=0$, alors pour toute arête $e=(v_1,v_2)$, on a $\lambda_{v_1}=\lambda_{v_2}$: $\lambda$ est constante sur chaque composante connexe du graphe. Donc $dim Vect (\epsilon_v )_{v \in V} \geq |V|-n$. Donc $dim K= dim \left(
+\bigcap Ker \langle (\epsilon_v )_{v \in V}, \cdot \rangle \right)= dim E - dim Vect \epsilon_v\leq 3k- 2k+n$.
+
+\end{proof}
+%"Petersen's Theorem. Every cubic, bridgeless graph contains a perfect matching"
+
+
+
+Pour chaque sommet $v\in V$, on pose $d_v:E\to E$ donnée par $\langle d_v(a),b\rangle =\frac{1}{3}\epsilon_{a->v}\epsilon_{b->v}$. %attention aux changements d'orientation
+
+Clairement $K= \bigcap Ker u_v$
+On pose ensuite $d=\sum_{v\in V} d_v$. %Clairement $Ker d= K$
+
+On sait que $K \subseteq Ker d$ mais a priori l'inclusion peut être stricte: on a seulement la condition plus faible donnée, avec les notations correspondants à la figure ref{figure_1}, à $2e_0=e_1+e_2+e_3+e_4$.
+
+On suppose maintenant que les cycles du graphe sont tous de longueur paire, on peut associer un signe $s_v=\pm 1$ à chaque sommet $v$ de telle sorte que les sommets adjacents soient de signe opposé. On pose alors alors  $d^*=\sum_{v\in V} s_v d_v$. Avec les mêmes notations, $Ker d^*$ correspond alors aux conditions $e_1+e_2=e_3+e_4$: en particulier on voit que $Ker d\cap Ker d^*=K$. On pose encore $d^+=d+d^*$ et $d^-=d-d^*$, et clairement $Ker d^+\cap Ker d^-=K$. De plus, la seule autre valeur propre (multiple) de $d^+$ et de $d^-$ est $1$: on a deux projecteurs orthogonaux. En particulier pour tout $z\in \mathbb{C}$,
+ \[\|v -zdv \|= \left\| v-z \frac{d^+-d^-}{2}v\right\|\leq \frac{1}{2} (\|v-z d^+v\|+ \|v-z d^-v\|\leq max(1, |1-z|)\|v\| \]
+De plus, lorsque $|1-z|<1$, le cas d'égalité est atteint si et seulement si $v\in Ker d^+\cap Ker d^-=K$. On a donc \[ \forall z, |1-z|<1 \implies (Id-zd)^k v \underset{k \to \infty}{\longrightarrow} \pi_K (v)\]
+
+Les valeurs propres de $d$ et $d^*$, réelles, sont donc toutes de valeur absolue plus petit que $1$
+
+
+\begin{figure}
+  \caption{figure 1} \label{figure_1}
+\begin{tikzpicture}
+    %,>=stealth,scale=3]
+\draw  [->-](0,0) -- (1,0) node [midway, above] {$e_0$} ;
+\draw  [->-] (-0.5,0.87) -- (0,0) node [midway, above] {$e_1$};
+\draw  [->-] (-0.5,-0.87) -- (0,0) node [midway, above] {$e_2$};
+\draw  [-<-] (1.5,0.87) -- (1,0) node [midway, above] {$e_3$};
+\draw  [-<-] (1.5,-0.87) -- (1,0) node [midway, above] {$e_4$};
+\end{tikzpicture}
+\end{figure}
+
+
+%\begin{proof}
+%Dans un graphe $G=(V,E)$ trivalent à $2k$ sommets, sans boucle, on peut colorier $k$ arêtes de telle sorte que deux arêtes coloriées distinctes n'ont jamais un sommet commun: supposons qu'on ait le résultat pour $k'<k$, et qu'on ait sur $G$ un tel coloriage $c$ à $j<k$ arêtes. Puisque $2j$ sommets sont couverts, il existe nécessairement deux sommets distincts $s$ et $t$, non converts par $c$, le plus proche possible. Soit $l$ la distance entre ces deux sommets: on fait encore une récurrence sur $l$. Si c'est $1$, on rajoute $(s,t)$ au coloriage. Soit $P=(s=p_0, p_1,\dots ,p_l, p_{l+1}=t$ un chemin injectif dans $G$ reliant $s$ et $t$. Tous les sommets intermédiaires sont couverts par une arête coloriée (sans quoi $l$ n'est pas minimal). S'il existe une arête coloriée $a$ telle que $a=(p_i,p_{i+1})$,
+%on modifie il est facile de modifier le coloriage pour augmenter son cardinal: on prend $i$ minimal pour la propriété
+
+
+%On ajoute $(p_{2m},p_{2m+1})$ à $c$ pour tout  $m\leq l/2$. Si $p_i$
+
+%\end{proof}*/
+
+
+\end{document}

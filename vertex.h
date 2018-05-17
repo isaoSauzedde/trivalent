@@ -5,7 +5,7 @@ class Edge;
 
 class Vertex{
   friend class Edge;
-    friend class Trivalent;
+  friend class Trivalent;
 
 protected:
   Edge* edges[3];
@@ -17,9 +17,9 @@ public:
   Vertex(Edge *e);
   ~Vertex();
 
-  bool ajout_exterior();
-  bool ajout_interior();
-  Edge*  link(Vertex *v);
+  bool ajout_exterior(int *label_edge);
+  bool ajout_interior(int *label_edge);
+  Edge*  link(Vertex *v, int *label_edge); //augmente *label_edge, APRES avoir mis un label
 };
 
 #endif
